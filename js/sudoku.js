@@ -1,4 +1,5 @@
 const waitFillSign = 0
+// const waitFillSign = '.'
 
 const handleFilledNum = (num) => {
   // return String(num)

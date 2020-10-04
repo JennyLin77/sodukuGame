@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>sudoku</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="style/index.css">
 </head>
 <body>
+  <div class="loading-pic-wrap"></div>
   <div class="container">
     <div class="level-container">
       <label for="isCheckEveryStep">是否检查每步操作</label>
@@ -14,8 +15,8 @@
       <label for="level">难度选择</label>
       <select id="level" name="level">
         <option value="0">easy</option>
-        <option value="1">middle</option>
-        <option value="2" selected="selected">hard</option></option>
+        <option value="1" selected="selected">middle</option>
+        <option value="2">hard</option></option>
       </select>
       <label for="level-detail">提示数数量</label>
       <select id="level_detail" name="level-detail"></select>
@@ -63,21 +64,31 @@
     <div class="input-area">
       <div class="input-area-tip">Please select a number from the list below, or clear the field.</div>
       <div class="input-area-wrap">
-        <div class="input-btn input-num">1</div>
-        <div class="input-btn input-num">2</div>
-        <div class="input-btn input-num">3</div>
-        <div class="input-btn input-num">4</div>
-        <div class="input-btn input-num">5</div>
-        <div class="input-btn input-num">6</div>
-        <div class="input-btn input-num">7</div>
-        <div class="input-btn input-num">8</div>
-        <div class="input-btn input-num">9</div>
-        <div class="input-btn input-clear">X</div>
+        <div class="input-btn input-num-btn">1</div>
+        <div class="input-btn input-num-btn">2</div>
+        <div class="input-btn input-num-btn">3</div>
+        <div class="input-btn input-num-btn">4</div>
+        <div class="input-btn input-num-btn">5</div>
+        <div class="input-btn input-num-btn">6</div>
+        <div class="input-btn input-num-btn">7</div>
+        <div class="input-btn input-num-btn">8</div>
+        <div class="input-btn input-num-btn">9</div>
+        <div class="input-btn input-clear-btn">X</div>
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="sudoku.js"></script>
-  <script type="text/javascript" src="testSudoku.js"></script>
-  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="js/constants.js"></script>
+  <script type="text/javascript" src="js/utils.js"></script>
+
+  <script type="text/javascript" src="js/sudoku.js"></script>
+  <script type="text/javascript" src="js/testSudoku.js"></script>
+
+  <script type="text/javascript" src="js/tableCells.js"></script>
+  <script type="text/javascript" src="js/handleInputNum.js"></script>
+
+  <script type="text/javascript" src="js/handleSetting.js"></script>
+  <script type="text/javascript" src="js/godOperations.js"></script>
+
+  <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>

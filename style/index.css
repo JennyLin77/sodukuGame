@@ -4,6 +4,7 @@
 }
 
 body {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,10 +12,35 @@ body {
   height: 100vh;
   text-align: center;
 }
+body.loading:before {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.loading-pic-wrap {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url(../assets/loading.gif) no-repeat;
+}
+body.loading .loading-pic-wrap {
+  display: block;
+}
+
 .container {
   width: 1200px;
   margin: 0 auto;
 }
+
 
 .level-container {
   margin-bottom: 40px;
@@ -22,6 +48,7 @@ body {
 .level-container select, .level-container input {
   margin-right: 20px;
 }
+
 
 .content {
   display: flex;
@@ -58,6 +85,7 @@ body {
   font-size: 14px;
 }
 
+
 .middle-bar {
   flex: auto;
   text-align: center;
@@ -82,10 +110,10 @@ body {
   border-bottom: 1px solid #333;
   cursor: pointer;
 }
-.cell.fix-num {
+.cell.fix-num-cell {
   cursor: default;
 }
-.cell.input-num {
+.cell.input-num-cell {
   font-size: 18px;
   font-weight: bold;
 }
