@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sudoku</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <div class="level-container">
+      <label for="isCheckEveryStep">是否检查每步操作</label>
+      <input type="checkbox" id="check_every_step_radio" name="isCheckEveryStep" value="1">
+      <label for="level">难度选择</label>
+      <select id="level" name="level">
+        <option value="0">easy</option>
+        <option value="1">middle</option>
+        <option value="2" selected="selected">hard</option></option>
+      </select>
+      <label for="level-detail">提示数数量</label>
+      <select id="level_detail" name="level-detail"></select>
+      <button id="restart_btn">RESTART</button>
+    </div>
+    <div class="content">
+      <div class="left-bar">
+        <section>
+          <h5>数独</h5>
+          <p>数独是一种风靡全球的智力游戏，也称为Sudoku，Number Place。正规的数独题目需要保证每个题目仅有一个解。</p>
+        </section>
+        <section>
+          <h5>数独规则</h5>
+          <p>标准数独由9行，9列共81的小格子构成。</p>
+          <p>分别在格子中填入1到9的数字，并满足下面的条件。</p>
+          <ul class="rule-list">
+            <li class="rule">每一行都用到1、2、3、4、5、6、7、8、9，不重复</li>
+            <li class="rule">每一列都用到1、2、3、4、5、6、7、8、9，不重复</li>
+            <li class="rule">每3×3的格子都用到1、2、3、4、5、6、7、8、9，不重复</li>
+          </ul>
+        </section>
+      </div>
+      <div class="middle-bar">
+        <div id="table" class="table"></div>
+      </div>
+      <div class="right-bar">
+        <div class="right-bar-container">
+          <div class="one-click-filling-btn-wrap">
+            <button class="one-click-filling-btn">一键填写</button>
+          </div>
+          <div class="one-click-clear-btn-wrap">
+            <button class="one-click-clear-btn">一键清空</button>
+          </div>
+          <div class="check-btn-wrap">
+            <button class="check-btn">Check</button>
+            <div class="check-result"></div>
+          </div>
+          <div class="check-mark-btn-wrap">
+            <button class="check-mark-btn">Check & Mark</button>
+            <div class="check-mark-result"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="input-area">
+      <div class="input-area-tip">Please select a number from the list below, or clear the field.</div>
+      <div class="input-area-wrap">
+        <div class="input-btn input-num">1</div>
+        <div class="input-btn input-num">2</div>
+        <div class="input-btn input-num">3</div>
+        <div class="input-btn input-num">4</div>
+        <div class="input-btn input-num">5</div>
+        <div class="input-btn input-num">6</div>
+        <div class="input-btn input-num">7</div>
+        <div class="input-btn input-num">8</div>
+        <div class="input-btn input-num">9</div>
+        <div class="input-btn input-clear">X</div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="sudoku.js"></script>
+  <script type="text/javascript" src="testSudoku.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
