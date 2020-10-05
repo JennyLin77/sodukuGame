@@ -2,7 +2,7 @@ const getInputNumAndResultTipEls = () => {
   return {
     checkResultTipEl: document.querySelector('.check-result'),
     checkMarkResultTipEl: document.querySelector('.check-mark-result'),
-    inputNumCellEls: document.querySelectorAll('.table .input-num-cell'),
+    tableNumInputEls: document.querySelectorAll('.table .input-num-cell-input'),
   }
 }
 const getValAndRowIdxAndColumnIdx = (el) => {
@@ -10,7 +10,7 @@ const getValAndRowIdxAndColumnIdx = (el) => {
   const { rowIdx, columnIdx } = getRowAndColumnIdx(idx)
 
   return {
-    val: +el.innerHTML,
+    val: +el.value,
     rowIdx,
     columnIdx,
   }
@@ -32,12 +32,12 @@ const handleCheck = () => {
   const {
     checkResultTipEl,
     checkMarkResultTipEl,
-    inputNumCellEls,
+    tableNumInputEls,
   } = getInputNumAndResultTipEls()
 
   let isValid = true
-  for (let i = 0; i < inputNumCellEls.length; i++) {
-    const el = inputNumCellEls[i]
+  for (let i = 0; i < tableNumInputEls.length; i++) {
+    const el = tableNumInputEls[i]
     const { val, rowIdx, columnIdx } = getValAndRowIdxAndColumnIdx(el)
 
     if (val !== finalCells[rowIdx][columnIdx]) {
@@ -55,12 +55,12 @@ const handleCheckAndMark = () => {
   const {
     checkResultTipEl,
     checkMarkResultTipEl,
-    inputNumCellEls,
+    tableNumInputEls,
   } = getInputNumAndResultTipEls()
 
   let isValid = true
-  for (let i = 0; i < inputNumCellEls.length; i++) {
-    const el = inputNumCellEls[i]
+  for (let i = 0; i < tableNumInputEls.length; i++) {
+    const el = tableNumInputEls[i]
     const { val, rowIdx, columnIdx } = getValAndRowIdxAndColumnIdx(el)
 
     if (val !== finalCells[rowIdx][columnIdx]) {
@@ -84,11 +84,11 @@ const handleOneClickFillingOrClear = (type) => {
   toggleInputArea(false);
   removeCurForLastInputCell()
 
-  const inputNumCellEls = document.querySelectorAll('.table .input-num-cell')
-  inputNumCellEls.forEach(el => {
+  const tableNumInputEls = document.querySelectorAll('.table .input-num-cell-input')
+  tableNumInputEls.forEach(el => {
     const idx = el.dataIdx
     const { rowIdx, columnIdx } = getRowAndColumnIdx(idx)
-    el.innerHTML = type === oneClickType.filling ? finalCells[rowIdx][columnIdx] : ''
+    el.value = type === oneClickType.filling ? finalCells[rowIdx][columnIdx] : ''
     el.className = removeClassName(el.className, 'error')
   })
 }

@@ -1,4 +1,4 @@
-let lastInputCellEl = null;
+let lastTableNumInputEl = null;
 let finalCells = null;
 const basicFillNumCount = 16
 let isCheckEveryStep = false

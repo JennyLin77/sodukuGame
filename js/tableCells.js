@@ -3,20 +3,10 @@ const toggleInputArea = (isShow) => {
 }
 
 const removeCurForLastInputCell = () => {
-  if (lastInputCellEl) {
-    lastInputCellEl.className = removeClassName(lastInputCellEl.className, 'cur')
-    lastInputCellEl = null
+  if (lastTableNumInputEl) {
+    lastTableNumInputEl.className = removeClassName(lastTableNumInputEl.className, 'cur')
+    lastTableNumInputEl = null
   }
-}
-
-const handleInputCell = (e) => {
-  toggleInputArea(true);
-  const el = e.target
-
-  removeCurForLastInputCell()
-
-  lastInputCellEl = el
-  el.className = addClassName(el.className, 'cur')
 }
 
 const handleFixCell = (e) => {
@@ -24,19 +14,69 @@ const handleFixCell = (e) => {
   removeCurForLastInputCell()
 }
 
+const handleTableNumInputFocus = (e) => {
+  toggleInputArea(true);
+  const el = e.target
+
+  removeCurForLastInputCell()
+
+  lastTableNumInputEl = el
+  el.className = addClassName(el.className, 'cur')
+}
+
+const disableTableNumInputPaste = (e) => {
+  e.preventDefault()
+}
+
+const handleTableNumInputKeyup = (e) => {
+  const val = e.target.value
+  const handledVal = val.replace(/[^1-9]/g, '').substring(0, 1)
+  e.target.value = handledVal
+}
+
+const handleInputNum = (inputNum) => {
+  if (lastTableNumInputEl) {
+    const idx = lastTableNumInputEl.dataIdx
+    const { rowIdx, columnIdx } = getRowAndColumnIdx(idx)
+
+    lastTableNumInputEl.value = inputNum
+
+    if (!isCheckEveryStep) { return; }
+    if (inputNum && inputNum !== finalCells[rowIdx][columnIdx]) {
+      lastTableNumInputEl.className = addClassName(lastTableNumInputEl.className, 'error')
+    } else {
+      lastTableNumInputEl.className = removeClassName(lastTableNumInputEl.className, 'error')
+    }
+  }
+}
+const handleTableNumInputChange = (e) => {
+  const value = +e.target.value || ''
+  handleInputNum(value)
+}
+
 const bindCellEvents = () => {
   const fixNumCellEls = document.querySelectorAll('.table .fix-num-cell')
-  const inputNumCellEls = document.querySelectorAll('.table .input-num-cell')
+  const tableNumInputEls = document.querySelectorAll('.table .input-num-cell-input')
   fixNumCellEls.forEach(el => { el.addEventListener('click', handleFixCell) })
-  inputNumCellEls.forEach(el => { el.addEventListener('click', handleInputCell) })
+  tableNumInputEls.forEach(el => {
+    el.addEventListener('focus', handleTableNumInputFocus)
+    el.addEventListener('paste', disableTableNumInputPaste)
+    el.addEventListener('keyup', handleTableNumInputKeyup)
+    el.addEventListener('change', handleTableNumInputChange)
+  })
 }
 
 const unbindCellEvents = () => {
   const fixNumCellEls = document.querySelectorAll('.table .fix-num-cell')
   if (fixNumCellEls) {
-    const inputNumCellEls = document.querySelectorAll('.table .input-num-cell')
+    const tableNumInputEls = document.querySelectorAll('.table .input-num-cell-input')
     fixNumCellEls.forEach(el => { el.removeEventListener('click', handleFixCell) })
-    inputNumCellEls.forEach(el => { el.removeEventListener('click', handleInputCell) })
+    tableNumInputEls.forEach(el => {
+      el.removeEventListener('focus', handleTableNumInputFocus)
+      el.removeEventListener('paste', disableTableNumInputPaste)
+      el.removeEventListener('keyup', handleTableNumInputKeyup)
+      el.removeEventListener('change', handleTableNumInputChange)
+    })
   }
 }
 
@@ -151,11 +191,16 @@ const generateTableCells = () => {
       cellEls[i].innerHTML = cells[i]
       cellEls[i].className = addClassName(cellEls[i].className, 'fix-num-cell')
     } else {
+      const inputEl = document.createElement('input')
+      inputEl.type = 'text'
+      inputEl.className = 'input-num-cell-input'
+      inputEl.dataIdx = i
+      cellEls[i].appendChild(inputEl)
       cellEls[i].className = addClassName(cellEls[i].className, 'input-num-cell')
     }
   }
 
-  lastInputCellEl = null
+  lastTableNumInputEl = null
   bindCellEvents()
 
   toggleLoadingForBody(false)

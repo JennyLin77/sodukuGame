@@ -22,10 +22,10 @@ const initLevelDetailOption = (level) => {
 const handleCheckOneStep = (e) => {
   isCheckEveryStep = e.target.checked
 
-  const inputNumCellEls = document.querySelectorAll('.table .input-num-cell')
+  const tableNumInputEls = document.querySelectorAll('.table .input-num-cell-input')
   if (isCheckEveryStep) {
-    inputNumCellEls.forEach(el => {
-      const val = +el.innerHTML
+    tableNumInputEls.forEach(el => {
+      const val = +el.value
       const idx = el.dataIdx
       const { rowIdx, columnIdx } = getRowAndColumnIdx(idx)
 
@@ -36,7 +36,7 @@ const handleCheckOneStep = (e) => {
       }
     })
   } else {
-    inputNumCellEls.forEach(el => {
+    tableNumInputEls.forEach(el => {
       el.className = removeClassName(el.className, 'error')
     })
   }
